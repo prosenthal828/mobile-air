@@ -233,6 +233,34 @@ class System
     }
 
     /**
+     * Keep the app's screen out of screenshots and the app switcher.
+     *
+     * Android sets FLAG_SECURE on the app's main window: Recents shows a
+     * blank card, and screenshots and screen recordings capture the window
+     * as black. iOS puts an opaque cover over the app while it is in the
+     * background, so the app switcher shows the cover instead of the app.
+     * iOS cannot block screenshots.
+     *
+     * The setting lasts until the app process ends. Turn it on when the app
+     * starts to cover every screen, or around the screens that need it.
+     *
+     * @param  bool  $enabled  True to turn the privacy screen on, false to turn it off
+     * @return bool True when the device applied the setting
+     */
+    public function setPrivacyScreen(bool $enabled): bool
+    {
+        if (! function_exists('nativephp_call')) {
+            return false;
+        }
+
+        $result = nativephp_call('System.SetPrivacyScreen', json_encode(['enabled' => $enabled]));
+
+        $decoded = is_string($result) ? json_decode($result, true) : null;
+
+        return is_array($decoded) && ($decoded['enabled'] ?? null) === $enabled;
+    }
+
+    /**
      * Open the app's settings screen in the device settings.
      *
      * This allows users to manage permissions (e.g., push notifications,

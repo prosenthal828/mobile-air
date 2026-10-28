@@ -40,6 +40,29 @@ enum SystemFunctions {
         }
     }
 
+    // MARK: - System.SetPrivacyScreen
+
+    /// Turn the privacy screen on or off. While it is on, the app switcher
+    /// shows an opaque cover instead of the app. iOS cannot block
+    /// screenshots. See `PrivacyScreen.swift`.
+    /// Parameters:
+    ///   - enabled: boolean - Required, so a malformed call can't turn it off
+    /// Returns:
+    ///   - enabled: boolean - The state now applied
+    class SetPrivacyScreen: BridgeFunction {
+        func execute(parameters: [String: Any]) throws -> [String: Any] {
+            guard let enabled = parameters["enabled"] as? Bool else {
+                throw BridgeError.invalidParameters("enabled must be a boolean")
+            }
+
+            DispatchQueue.main.async {
+                PrivacyScreen.shared.setEnabled(enabled)
+            }
+
+            return ["enabled": enabled]
+        }
+    }
+
     // MARK: - System.GetAppearance
 
     /// Current system appearance (light / dark). Backs `System::appearance()` /

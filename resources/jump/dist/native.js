@@ -426,11 +426,22 @@ export async function isMobile() {
     return false;
 }
 
+/**
+ * Turn the privacy screen on or off. Android blocks screenshots and blanks
+ * the Recents card (FLAG_SECURE); iOS covers the app-switcher snapshot.
+ * Resolves true when the device applied the setting.
+ */
+export async function setPrivacyScreen(enabled) {
+    const result = await bridgeCall('System.SetPrivacyScreen', { enabled: enabled === true });
+    return result?.enabled === (enabled === true);
+}
+
 export const system = {
     isIos: isIos,
     isAndroid: isAndroid,
     isMobile: isMobile,
-    flashlight: flashlight  // Legacy support - deprecated but kept for compatibility
+    flashlight: flashlight,  // Legacy support - deprecated but kept for compatibility
+    setPrivacyScreen: setPrivacyScreen
 };
 
 // ============================================================================

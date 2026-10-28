@@ -164,6 +164,10 @@ class MainActivity : FragmentActivity(), WebViewProvider, NativeElementBridge.We
         // skipped inside the monitor so launch doesn't look like a change.
         ThermalStateMonitor.start(this)
 
+        // Re-apply the privacy screen (FLAG_SECURE) on a recreated activity;
+        // System::setPrivacyScreen() keeps the setting for the process.
+        PrivacyScreen.apply(this)
+
         // Android 15 edge-to-edge compatibility fix
         WindowCompat.setDecorFitsSystemWindows(window, false)
 

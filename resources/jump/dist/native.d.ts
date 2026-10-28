@@ -256,6 +256,13 @@ export function isAndroid(): Promise<boolean>;
 export function isMobile(): Promise<boolean>;
 
 /**
+ * Turn the privacy screen on or off. Android blocks screenshots and blanks
+ * the Recents card (FLAG_SECURE); iOS covers the app-switcher snapshot.
+ * Resolves true when the device applied the setting.
+ */
+export function setPrivacyScreen(enabled: boolean): Promise<boolean>;
+
+/**
  * System namespace - matches PHP System facade
  * Provides platform detection utilities
  */
@@ -280,6 +287,11 @@ export const system: {
      * @deprecated Use device.flashlight() instead
      */
     flashlight(): Promise<{ success: boolean; state: boolean }>;
+
+    /**
+     * Turn the privacy screen on or off
+     */
+    setPrivacyScreen(enabled: boolean): Promise<boolean>;
 };
 
 // ============================================================================

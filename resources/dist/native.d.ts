@@ -101,12 +101,14 @@ export const Haptics: {
 export function IsIos(): Promise<boolean>;
 export function IsAndroid(): Promise<boolean>;
 export function IsMobile(): Promise<boolean>;
+export function SetPrivacyScreen(enabled: boolean): Promise<boolean>;
 
 export const System: {
     isIos(): Promise<boolean>;
     isAndroid(): Promise<boolean>;
     isMobile(): Promise<boolean>;
     flashlight(): Promise<{ success: boolean; state: boolean }>;
+    setPrivacyScreen(enabled: boolean): Promise<boolean>;
 };
 
 // ============================================================================

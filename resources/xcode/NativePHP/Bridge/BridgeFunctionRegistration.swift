@@ -29,6 +29,7 @@ func registerBridgeFunctions() {
     registry.register("System.OpenAppSettings", function: SystemFunctions.OpenAppSettings())
     registry.register("System.GetAppearance", function: SystemFunctions.GetAppearance())
     registry.register("System.GetOrientation", function: SystemFunctions.GetOrientation())
+    registry.register("System.SetPrivacyScreen", function: SystemFunctions.SetPrivacyScreen())
 
     // UI.* — core built-in. Android twin: bridge/functions/UIFunctions.kt
     // (which also registers UI.SetTransition; iOS transitions ride the

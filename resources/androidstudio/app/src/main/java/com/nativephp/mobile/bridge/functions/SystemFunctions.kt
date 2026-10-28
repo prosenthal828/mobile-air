@@ -10,6 +10,7 @@ import android.provider.Settings
 import android.util.Log
 import com.nativephp.mobile.bridge.BridgeError
 import com.nativephp.mobile.bridge.BridgeFunction
+import com.nativephp.mobile.ui.PrivacyScreen
 
 /**
  * Functions related to system-level operations
@@ -111,6 +112,26 @@ object SystemFunctions {
                 activity.moveTaskToBack(true)
             }
             return mapOf("success" to true)
+        }
+    }
+
+    /**
+     * Turn the privacy screen on or off. While it is on, Recents shows a
+     * blank card for the app and screenshots / screen recordings of the main
+     * window come out black (FLAG_SECURE). See `ui/PrivacyScreen.kt`.
+     * Parameters:
+     *   - enabled: boolean - Required, so a malformed call can't turn it off
+     * Returns:
+     *   - enabled: boolean - The state now applied
+     */
+    class SetPrivacyScreen : BridgeFunction {
+        override fun execute(parameters: Map<String, Any>): Map<String, Any> {
+            val enabled = parameters["enabled"] as? Boolean
+                ?: throw BridgeError.InvalidParameters("enabled must be a boolean")
+
+            PrivacyScreen.set(enabled)
+
+            return mapOf("enabled" to enabled)
         }
     }
 

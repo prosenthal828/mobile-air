@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string|null platform()
  * @method static bool runningInJump()
  * @method static void appSettings()
+ * @method static bool setPrivacyScreen(bool $enabled)
  * @method static string appearance()
  * @method static bool isDarkMode()
  * @method static bool isLightMode()
