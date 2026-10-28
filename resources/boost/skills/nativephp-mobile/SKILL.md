@@ -372,10 +372,10 @@ Normal). iOS is 1:1 (`nominal`/`fair`/`serious`/`critical`). `Device::getInfo()`
 includes `processorCount`, `activeProcessorCount`, `systemUptime`, and `memTotal` (device RAM in bytes,
 alongside existing `memUsed`). `Device::getTimezone()` gives the phone's IANA timezone (`Europe/Lisbon`), or
 `null` off-device; Laravel's `app.timezone` (UTC by default) is not the phone's.
-`System::setPrivacyScreen(true)` keeps sensitive screens private: Android blocks screenshots and screen
-recording and blanks the Recents card (FLAG_SECURE on the main window); iOS covers the app-switcher snapshot
-but cannot block screenshots. It lasts for the app process, so turn it on at startup or around the screens
-that need it.
+`System::setPrivacyScreen(true)` keeps sensitive screens private: Android sets FLAG_SECURE on the main window
+(screenshots and recordings come out black, Recents shows a blank card; dialogs, pickers and plugin activities
+are not covered); iOS covers the snapshot it saves when the app goes to the background, but cannot block
+screenshots. It lasts for the app process, so turn it on at startup or around the screens that need it.
 
 **Plugins** (separate Composer packages): browser, camera, microphone, network, share (free); biometrics,
 geolocation, scanner, secure-storage (paid); firebase (push notifications, proprietary); vibe

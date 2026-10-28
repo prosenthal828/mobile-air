@@ -237,9 +237,13 @@ class System
      *
      * Android sets FLAG_SECURE on the app's main window: Recents shows a
      * blank card, and screenshots and screen recordings capture the window
-     * as black. iOS puts an opaque cover over the app while it is in the
-     * background, so the app switcher shows the cover instead of the app.
-     * iOS cannot block screenshots.
+     * as black. Only the main window is covered; dialogs, system pickers and
+     * activities opened by plugins are separate windows and are not.
+     *
+     * iOS puts an opaque cover over the app when it goes to the background,
+     * so the snapshot iOS keeps for the app switcher shows the cover. While
+     * the switcher is open straight over the app, its card still shows the
+     * app. iOS cannot block screenshots or screen recording.
      *
      * The setting lasts until the app process ends. Turn it on when the app
      * starts to cover every screen, or around the screens that need it.

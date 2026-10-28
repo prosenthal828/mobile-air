@@ -227,11 +227,16 @@ export async function IsMobile() {
  * Turn the privacy screen on or off. Android blocks screenshots and blanks
  * the Recents card (FLAG_SECURE); iOS covers the app-switcher snapshot.
  * @param {boolean} enabled
- * @returns {Promise<boolean>} True when the device applied the setting
+ * @returns {Promise<boolean>} True when the device applied the setting,
+ *   false otherwise (including a native build without it), like PHP
  */
 export async function SetPrivacyScreen(enabled) {
-    const result = await BridgeCall('System.SetPrivacyScreen', { enabled: enabled === true });
-    return result?.enabled === (enabled === true);
+    try {
+        const result = await BridgeCall('System.SetPrivacyScreen', { enabled: enabled === true });
+        return result?.enabled === (enabled === true);
+    } catch (e) {
+        return false;
+    }
 }
 
 export const System = {

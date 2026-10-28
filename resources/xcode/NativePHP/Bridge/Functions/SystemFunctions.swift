@@ -42,9 +42,9 @@ enum SystemFunctions {
 
     // MARK: - System.SetPrivacyScreen
 
-    /// Turn the privacy screen on or off. While it is on, the app switcher
-    /// shows an opaque cover instead of the app. iOS cannot block
-    /// screenshots. See `PrivacyScreen.swift`.
+    /// Turn the privacy screen on or off. While it is on, each scene is
+    /// covered when it goes to the background, so the app-switcher snapshot
+    /// shows the cover. iOS cannot block screenshots. See `PrivacyScreen.swift`.
     /// Parameters:
     ///   - enabled: boolean - Required, so a malformed call can't turn it off
     /// Returns:
