@@ -224,8 +224,9 @@ export async function IsMobile() {
 }
 
 /**
- * Turn the privacy screen on or off. Android blocks screenshots and blanks
- * the Recents card (FLAG_SECURE); iOS covers the app-switcher snapshot.
+ * Turn the privacy screen on or off. Android sets FLAG_SECURE on the main
+ * window (screenshots come out black, Recents shows a blank card); iOS covers
+ * the snapshot saved when the app goes to the background.
  * @param {boolean} enabled
  * @returns {Promise<boolean>} True when the device applied the setting,
  *   false otherwise (including a native build without it), like PHP

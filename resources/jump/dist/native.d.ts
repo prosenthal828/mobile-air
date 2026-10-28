@@ -256,8 +256,9 @@ export function isAndroid(): Promise<boolean>;
 export function isMobile(): Promise<boolean>;
 
 /**
- * Turn the privacy screen on or off. Android blocks screenshots and blanks
- * the Recents card (FLAG_SECURE); iOS covers the app-switcher snapshot.
+ * Turn the privacy screen on or off. Android sets FLAG_SECURE on the main
+ * window (screenshots come out black, Recents shows a blank card); iOS covers
+ * the snapshot saved when the app goes to the background.
  * Resolves true when the device applied the setting.
  */
 export function setPrivacyScreen(enabled: boolean): Promise<boolean>;
